@@ -1,5 +1,5 @@
 ports         = [22, 80, 8080, 3306, 5601, 3000]
-ami           = "ami-04505e74c0741db8d"
+ami           = "ami-0e472ba40eb589f49"
 instance_type = "t2.micro"
 
 
