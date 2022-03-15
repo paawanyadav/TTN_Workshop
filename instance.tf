@@ -28,7 +28,7 @@ resource "aws_instance" "Nginx" {
   key_name               = "LEMPAWS"
   vpc_security_group_ids = [aws_security_group.Security_TF.id]
   subnet_id              = aws_subnet.public_subnet.id
-  user_data              = file("./script/nginx_Script.sh")
+  #user_data              = file("./script/nginx_Script.sh")
   tags = {
     Name = "Nginx"
   }
