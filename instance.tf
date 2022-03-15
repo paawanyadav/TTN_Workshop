@@ -21,19 +21,6 @@ resource "aws_instance" "Jenkins" {
   }
 }
 
-#EC2 for Nginx 
-resource "aws_instance" "Nginx" {
-  ami                    = var.ami
-  instance_type          = var.instance_type
-  key_name               = "LEMPAWS"
-  vpc_security_group_ids = [aws_security_group.Security_TF.id]
-  subnet_id              = aws_subnet.public_subnet.id
-  #user_data              = file("./script/nginx_Script.sh")
-  tags = {
-    Name = "Nginx"
-  }
-}
-
 #EC2 for Monitoring and logs
 resource "aws_instance" "Monitoring_Logs" {
   ami                    = var.ami
