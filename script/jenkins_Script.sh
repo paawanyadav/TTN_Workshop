@@ -22,5 +22,3 @@ sudo apt-get update -y
 sudo apt-get install grafana -y
 sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
-
-
