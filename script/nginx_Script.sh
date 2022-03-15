@@ -1,17 +1,29 @@
 #!/bin/bash
 
 sudo apt update
-
 sudo apt install nginx -y
-sudo apt update
+sudo apt update -y
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
 sudo apt install php php-mysql php-gd php-cli php-common php-fpm  -y
-
-sudo wget https://wordpress.org/latest.zip
+sudo apt update -y
+wget https://wordpress.org/latest.zip
 sudo apt install unzip -y
-sudo unzip latest.zip
+unzip latest.zip
 
 sudo cp -r wordpress/* /var/www/html
-sudo systemctl restart nginx
+cd /etc/nginx/sites-available
+sudo chown $USER:$USER default
+
+echo "server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+root /var/www/html;
+
+        # Add index.php to the list if you are using PHP
+        index index.php index.html index.htm index.nginx-debian.html    ;
+
+        server_name _;
+
+
