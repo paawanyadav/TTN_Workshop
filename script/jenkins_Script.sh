@@ -9,3 +9,18 @@ sudo apt-get update
 sudo apt-get install jenkins -y
 sudo systemctl restart jenkins 
 sudo apt install git
+
+
+# ELK kibana 5601
+sudo apt install kibana -y
+sudo systemctl enable kibana
+sudo systemctl start kibana
+
+## GRAFANA 3000
+sudo wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
+sudo apt-get update -y
+sudo apt-get install grafana -y
+sudo systemctl enable grafana-server
+sudo systemctl start grafana-server
+
+
