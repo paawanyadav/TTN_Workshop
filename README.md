@@ -21,4 +21,4 @@ Database - MySQL [RDS]
       - deployment strategy - zero downtime
       - monitoring setup and recommendation
 # Example App:-
-     Deploy Wordpress
+     Deploy Wordpress application
