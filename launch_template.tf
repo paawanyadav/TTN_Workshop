@@ -5,7 +5,11 @@ resource "aws_lb_target_group" "wordpress-tg" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.vpc.id
+  health_check {
+    matcher = [200,201,202,301,302]
+  }
 }
+
 
 # Application Load balancer
 
@@ -66,12 +70,6 @@ resource "aws_launch_template" "wordpress-tmplt" {
     enabled = true
   }
 
-  network_interfaces {
-    associate_public_ip_address = true
-    subnet_id                   = aws_subnet.public_subnet.id
-    security_groups             = [aws_security_group.Security_TF.id]
-  }
-
   tag_specifications {
     resource_type = "instance"
 
@@ -84,18 +82,18 @@ resource "aws_launch_template" "wordpress-tmplt" {
 }
 
 #  Auto Scaling Group
-
-resource "aws_autoscaling_group" "ASG" {
+resource "aws_autoscaling_group" "asg" {
   name                      = "wordpress-asg"
   max_size                  = 2
   min_size                  = 1
-  health_check_grace_period = 300
-  health_check_type         = "ELB"
   desired_capacity          = 1
+  health_check_grace_period = 300
+  health_check_type         = "EC2"
   force_delete              = true
+  vpc_zone_identifier       = [aws_subnet.public_subnet1.id,aws_subnet.public_subnet.id]
   target_group_arns         = [aws_lb_target_group.wordpress-tg.arn]
-  vpc_zone_identifier       = [aws_subnet.public_subnet.id]
   launch_template {
-    id = aws_launch_template.wordpress-tmplt.id
+    id      = aws_launch_template.wordpress-tmp.id
+    version = "$Latest" 
   }
 }
