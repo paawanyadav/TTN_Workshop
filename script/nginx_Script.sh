@@ -38,15 +38,3 @@ location ~ \.php$ {
 }" > default
 
 sudo systemctl restart nginx
-
-#mysql install
-sudo apt install mysql-server -y
-
-#grafana
-
-wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
-sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
-sudo apt update -y
-sudo apt install grafana -y
-sudo systemctl enable grafana-server
-sudo systemctl start grafana-server
