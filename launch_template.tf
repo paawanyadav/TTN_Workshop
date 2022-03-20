@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "wordpress-tg" {
   protocol = "HTTP"
   vpc_id   = aws_vpc.vpc.id
   health_check {
-    matcher = [200,201,202,301,302]
+    matcher = "201,202,301,302"
   }
 }
 
